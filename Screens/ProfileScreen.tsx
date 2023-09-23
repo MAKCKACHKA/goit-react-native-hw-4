@@ -22,6 +22,7 @@ import { SvgUri } from "react-native-svg";
 //                     <SVGImg width={200} height={200} />;
 
 import { messageCircle, mapPin, logOutSvg } from "../assets/svgJS/svg";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfileScreen = () => {
   //   const [login, setLogin] = useState("");
@@ -30,6 +31,7 @@ const ProfileScreen = () => {
 
   const [comentNumber, setComentNumber] = useState(0);
   const [likeNumber, setlikeNumber] = useState(0);
+  const navigation = useNavigation();
 
   //   const togglePasswordVisibility = () => {
   //     setShowPassword(!showPassword);
@@ -66,7 +68,110 @@ const ProfileScreen = () => {
                   source={require("../assets/favicon.png")}
                 />
                 <Text style={styles.title}>Natali Romanova</Text>
+                <View style={styles.publication}>
+                  <Image
+                    style={styles.publicationImg}
+                    source={require("../assets/favicon.png")}
+                  />
+                  <Text style={styles.publicationDescription}>Ліс</Text>
+                  <View style={styles.publicationInfo}>
+                    <View style={styles.publicationElem}>
+                      {/* <SvgXml xml={messageCircle} style={[[styles.svg]]} /> */}
+                      {comentNumber === 0 ? (
+                        <Image
+                          style={[[styles.svg]]}
+                          source={require("../assets/svg/messageCircle.svg")}
+                          //   source={require("../assets/svg/thumbsUp.svg")}
+                        />
+                      ) : (
+                        <Image
+                          style={[[styles.svg]]}
+                          source={require("../assets/svg/messageCircleFill.svg")}
+                          //   source={require("../assets/svg/thumbsUp.svg")}
+                        />
+                      )}
 
+                      <Text style={styles.publicationsNumber}>
+                        {comentNumber}
+                      </Text>
+                      {likeNumber === 0 ? (
+                        <Image
+                          style={[[styles.svg], { marginLeft: 24 }]}
+                          source={require("../assets/svg/thumbsUp.svg")}
+                        />
+                      ) : (
+                        <Image
+                          style={[[styles.svg], { marginLeft: 24 }]}
+                          source={require("../assets/svg/thumbsUpFill.svg")}
+                        />
+                      )}
+
+                      <Text style={styles.publicationsNumber}>
+                        {likeNumber}
+                      </Text>
+                    </View>
+                    <View style={styles.publicationElem}>
+                      {/* <SvgXml xml={mapPin} style={styles.svg} /> */}
+                      <Image
+                        style={styles.svg}
+                        source={require("../assets/svg/mapPin.svg")}
+                      />
+                      <Text style={styles.publicationLocation}>Ukraine</Text>
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.publication}>
+                  <Image
+                    style={styles.publicationImg}
+                    source={require("../assets/favicon.png")}
+                  />
+                  <Text style={styles.publicationDescription}>Ліс</Text>
+                  <View style={styles.publicationInfo}>
+                    <View style={styles.publicationElem}>
+                      {/* <SvgXml xml={messageCircle} style={[[styles.svg]]} /> */}
+                      {comentNumber === 0 ? (
+                        <Image
+                          style={[[styles.svg]]}
+                          source={require("../assets/svg/messageCircle.svg")}
+                          //   source={require("../assets/svg/thumbsUp.svg")}
+                        />
+                      ) : (
+                        <Image
+                          style={[[styles.svg]]}
+                          source={require("../assets/svg/messageCircleFill.svg")}
+                          //   source={require("../assets/svg/thumbsUp.svg")}
+                        />
+                      )}
+
+                      <Text style={styles.publicationsNumber}>
+                        {comentNumber}
+                      </Text>
+                      {likeNumber === 0 ? (
+                        <Image
+                          style={[[styles.svg], { marginLeft: 24 }]}
+                          source={require("../assets/svg/thumbsUp.svg")}
+                        />
+                      ) : (
+                        <Image
+                          style={[[styles.svg], { marginLeft: 24 }]}
+                          source={require("../assets/svg/thumbsUpFill.svg")}
+                        />
+                      )}
+
+                      <Text style={styles.publicationsNumber}>
+                        {likeNumber}
+                      </Text>
+                    </View>
+                    <View style={styles.publicationElem}>
+                      {/* <SvgXml xml={mapPin} style={styles.svg} /> */}
+                      <Image
+                        style={styles.svg}
+                        source={require("../assets/svg/mapPin.svg")}
+                      />
+                      <Text style={styles.publicationLocation}>Ukraine</Text>
+                    </View>
+                  </View>
+                </View>
                 <View style={styles.publication}>
                   <Image
                     style={styles.publicationImg}
@@ -124,7 +229,7 @@ const ProfileScreen = () => {
           </ScrollView>
         </View>
 
-        {/* <View style={styles.toolbar}>
+        <View style={styles.toolbar}>
           <View
             style={{
               width: 40,
@@ -133,14 +238,20 @@ const ProfileScreen = () => {
               justifyContent: "center",
             }}
           >
-            <Image
-              style={styles.svg}
-              source={require("../assets/svg/grid.svg")}
-            />
-          </View> */}
-        {/* <SvgXml xml={gridSvg} style={styles.svg} /> */}
+            <Pressable
+              onPress={() => {
+                navigation.navigate("Posts");
+              }}
+            >
+              <Image
+                style={styles.svg}
+                source={require("../assets/svg/grid.svg")}
+              />
+            </Pressable>
+          </View>
+          {/* <SvgXml xml={gridSvg} style={styles.svg} /> */}
 
-        {/* <Pressable style={styles.userBtn}>
+          <View style={styles.userBtn}>
             <Image
               style={[
                 [styles.svg],
@@ -149,15 +260,15 @@ const ProfileScreen = () => {
                 },
               ]}
               source={require("../assets/svg/user.svg")}
-            /> */}
-        {/* <SvgXml xml={userSvg} style={styles.svg} /> */}
-        {/* </Pressable>
+            />
+            {/* <SvgXml xml={userSvg} style={styles.svg} /> */}
+          </View>
           <Image
             style={{ width: 40, height: 40, alignSelf: "center" }}
             source={require("../assets/svg/add.svg")}
-          /> */}
-        {/* <SvgXml xml={userSvg} style={styles.svg} /> */}
-        {/* </View> */}
+          />
+          {/* <SvgXml xml={userSvg} style={styles.svg} /> */}
+        </View>
       </ImageBackground>
     </TouchableWithoutFeedback>
   );
@@ -290,10 +401,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 39,
     alignItems: "center",
-    paddingTop: 9,
+    paddingTop: 10,
     paddingBottom: 34,
-    borderTopColor: "black",
-    borderTopWidth: 1,
+    // borderTopColor: "black",
+    // borderTopWidth: 1,
   },
   svg: {
     width: 24,

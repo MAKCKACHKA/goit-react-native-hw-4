@@ -62,62 +62,61 @@ const Stack = createNativeStackNavigator();
 const Home = () => {
   const navigation = useNavigation();
   const [focusedCreatePosts, setfocusedCreatePosts] = useState(false);
-  return (
-    <Tabs.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused }) => {
-          if (
-            route.name === "PostsScreen"
-            // && focusedCreatePosts === false
-          ) {
-            return (
-              <Image
-                style={styles.svg}
-                source={require("../assets/svg/grid.svg")}
-              />
-              // <SvgXml xml={gridSvg} style={styles.svg} />
-            );
-          } else if (route.name === "CreatePostsScreen") {
-            return (
-              // <Pressable
-              //   onPress={() => {
-              //     navigation.navigate("CreatePostsScreen");
-              //   }}
-              // >
-              // focused ? (
-              //   setfocusedCreatePosts(true)
-              // ) : (
-              <Image
-                style={styles.createBtn}
-                source={require("../assets/svg/plusBtn.svg")}
-              />
-              // )
-              // {/* </Pressable> */}
+  return <PostsScreen />;
+  // <Tabs.Navigator
+  //   screenOptions={({ route }) => ({
+  //     tabBarIcon: ({ focused }) => {
+  //       if (
+  //         route.name === "PostsScreen"
+  //         // && focusedCreatePosts === false
+  //       ) {
+  //         return (
+  //           <Image
+  //             style={styles.svg}
+  //             source={require("../assets/svg/grid.svg")}
+  //           />
+  //           // <SvgXml xml={gridSvg} style={styles.svg} />
+  //         );
+  //       } else if (route.name === "CreatePostsScreen") {
+  //         return (
+  //           // <Pressable
+  //           //   onPress={() => {
+  //           //     navigation.navigate("CreatePostsScreen");
+  //           //   }}
+  //           // >
+  //           // focused ? (
+  //           //   setfocusedCreatePosts(true)
+  //           // ) : (
+  //           <Image
+  //             style={styles.createBtn}
+  //             source={require("../assets/svg/plusBtn.svg")}
+  //           />
+  //           // )
+  //           // {/* </Pressable> */}
 
-              // <SvgXml xml={plusBtnSvg} style={styles.svg} />
-            );
-          } else if (route.name === "ProfileScreen") {
-            return (
-              <Image
-                style={styles.svg}
-                source={require("../assets/svg/user.svg")}
-              />
-              // <SvgXml xml={userSvg} style={styles.svg} />
-            );
-          }
-        },
-        tabBarStyle: styles.toolbar,
-        headerShown: false,
-      })}
-      tabBarOptions={{
-        showLabel: false,
-      }}
-    >
-      <Tabs.Screen name="PostsScreen" component={PostsScreen} />
-      <Tabs.Screen name="CreatePostsScreen" component={CreatePostsScreen} />
-      <Tabs.Screen name="ProfileScreen" component={ProfileScreen} />
-    </Tabs.Navigator>
-  );
+  //           // <SvgXml xml={plusBtnSvg} style={styles.svg} />
+  //         );
+  //       } else if (route.name === "ProfileScreen") {
+  //         return (
+  //           <Image
+  //             style={styles.svg}
+  //             source={require("../assets/svg/user.svg")}
+  //           />
+  //           // <SvgXml xml={userSvg} style={styles.svg} />
+  //         );
+  //       }
+  //     },
+  //     tabBarStyle: styles.toolbar,
+  //     headerShown: false,
+  //   })}
+  //   tabBarOptions={{
+  //     showLabel: false,
+  //   }}
+  // >
+  //   <Tabs.Screen name="PostsScreen" component={PostsScreen} />
+  //   <Tabs.Screen name="CreatePostsScreen" component={CreatePostsScreen} />
+  //   <Tabs.Screen name="ProfileScreen" component={ProfileScreen} />
+  // </Tabs.Navigator>
 };
 
 // function App() {

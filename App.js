@@ -50,17 +50,17 @@ const App = () => {
 
       <NavigationContainer>
         <MainStack.Navigator
-          initialRouteName="Login"
+          initialRouteName="Registration"
           // screenOptions={{ headerShown: false }}
         >
+          <MainStack.Screen
+            name="Registration"
+            component={RegistrationScreen}
+          />
           <MainStack.Screen
             name="Login"
             component={LoginScreen}
             // options={{ title: "Start screen" }}
-          />
-          <MainStack.Screen
-            name="Registration"
-            component={RegistrationScreen}
           />
           <MainStack.Screen
             name="Home"
@@ -93,7 +93,7 @@ const App = () => {
           />
           <MainStack.Screen name="Comments" component={CommentsScreen} />
           <MainStack.Screen name="Profile" component={ProfileScreen} />
-          <MainStack.Screen name="PostsScreen" component={PostsScreen} />
+          <MainStack.Screen name="Posts" component={PostsScreen} />
           <MainStack.Screen name="Create Posts" component={CreatePostsScreen} />
         </MainStack.Navigator>
       </NavigationContainer>

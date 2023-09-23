@@ -40,12 +40,12 @@ const CreatePostsScreen = ({ navigation }) => {
     setLocation("");
   };
 
-  useEffect(() => {
-    // Скрыть навигацию на этой странице
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
+  // useEffect(() => {
+  //   // Скрыть навигацию на этой странице
+  //   navigation.setOptions({
+  //     headerShown: false,
+  //   });
+  // }, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

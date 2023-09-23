@@ -15,6 +15,7 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Svg, { Path } from "react-native-svg";
 import { logOutSvg, gridSvg, plusBtnSvg, userSvg } from "../assets/svgJS/svg";
@@ -23,7 +24,7 @@ import { SvgXml } from "react-native-svg";
 const PostsScreen = () => {
   //   const [email, setEmail] = useState("");
   //   const [showPassword, setShowPassword] = useState(false);
-
+  const navigation = useNavigation();
   return (
     <View style={styles.wrapper}>
       {/* <SVGImg width={500} height={200} /> */}
@@ -180,20 +181,33 @@ const PostsScreen = () => {
           </View>
         </View>
       </ScrollView>
-      {/* <View style={styles.toolbar}>
-        <Image style={styles.svg} source={require("../assets/svg/grid.svg")} /> */}
-      {/* <SvgXml xml={gridSvg} style={styles.svg} /> */}
-
-      {/* <Pressable style={styles.createBtn}>
+      <View style={styles.toolbar}>
+        <Image style={styles.svg} source={require("../assets/svg/grid.svg")} />
+        {/* <SvgXml xml={gridSvg} style={styles.svg} /> */}
+        <Pressable
+          style={styles.createBtn}
+          onPress={() => {
+            navigation.navigate("Create Posts");
+          }}
+        >
           <Image
             style={styles.createBtn}
             source={require("../assets/svg/plusBtn.svg")}
-          /> */}
-      {/* <SvgXml xml={plusBtnSvg} style={styles.svg} /> */}
-      {/* </Pressable>
-        <Image style={styles.svg} source={require("../assets/svg/user.svg")} /> */}
-      {/* <SvgXml xml={userSvg} style={styles.svg} /> */}
-      {/* </View> */}
+          />
+          {/* <SvgXml xml={plusBtnSvg} style={styles.svg} /> */}
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("Profile");
+          }}
+        >
+          <Image
+            style={styles.svg}
+            source={require("../assets/svg/user.svg")}
+          />
+        </Pressable>
+        {/* <SvgXml xml={userSvg} style={styles.svg} /> */}
+      </View>
     </View>
   );
 };
@@ -350,8 +364,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 9,
     paddingBottom: 34,
-    borderTopColor: "black",
-    borderTopWidth: 1,
+    // borderTopColor: "black",
+    // borderTopWidth: 1,
   },
 });
 
