@@ -15,7 +15,11 @@ import {
   Pressable,
 } from "react-native";
 
+import { useNavigation } from "@react-navigation/native";
+
 const RegistrationScreen = () => {
+  const navigation = useNavigation();
+
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,6 +46,7 @@ const RegistrationScreen = () => {
       style={styles.backgroundImage}
       resizeMode="stretch"
     >
+      {/* {password !== "" && <View>{() => navigation.navigate("Login")}</View>} */}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.wrapper}>
           <View style={styles.container}>
@@ -100,11 +105,20 @@ const RegistrationScreen = () => {
 
             <Pressable
               style={styles.registerButton}
-              onPress={handleRegistration}
+              // onPress={handleRegistration}
+              onPress={() => {
+                handleRegistration;
+                navigation.navigate("Home");
+              }}
             >
               <Text style={styles.registerButtonText}>Зареєструватися</Text>
             </Pressable>
-            <Text style={styles.loginLink}>Вже є акаунт? Увійти</Text>
+            <Text
+              onPress={() => navigation.navigate("Login")}
+              style={styles.loginLink}
+            >
+              Вже є акаунт? Увійти
+            </Text>
           </View>
         </View>
       </TouchableWithoutFeedback>

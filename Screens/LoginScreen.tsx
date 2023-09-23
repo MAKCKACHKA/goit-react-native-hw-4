@@ -11,103 +11,109 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  Alert,
   Button,
+  Pressable,
 } from "react-native";
 
+import { useNavigation } from "@react-navigation/native";
+
 const LoginScreen = () => {
-  // const [login, setLogin] = useState("");
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [showPassword, setShowPassword] = useState(false);
-  const [isInputFocused, setInputFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const handleLogin = () => {
-    // if (email !== "" && password !== "") {
-    //   console.log(`email: ${email}, password: ${password}`);
-    // }
-    // setEmail("");
-    // setPassword("");
-    Alert.alert(`email: ${email}, password: ${password}`);
+    console.log(`email: ${email}, password: ${password}`);
+    setEmail("");
+    setPassword("");
   };
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
-      () => {
-        setInputFocused(true);
-      }
-    );
-
-    const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      () => {
-        setInputFocused(false);
-      }
-    );
-
-    return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, []);
 
   return (
     <ImageBackground
       source={require("../assets/background.png")}
       style={styles.backgroundImage}
+      resizeMode="stretch"
     >
+      {/* <Pressable onPress={Keyboard.dismiss}> */}
+
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View
-          style={[
-            styles.container,
-            // , { paddingTop: isInputFocused ? 180 : 323 }
-          ]}
-        >
-          <View style={styles.wrapper}>
+        <View style={styles.wrapper}>
+          <View style={styles.container}>
             <Text style={styles.title}>Увійти</Text>
+
             <KeyboardAvoidingView
-              behavior={Platform.OS == "ios" ? "padding" : "height"}
+              behavior={Platform.OS == "ios" ? "padding" : undefined}
             >
               <TextInput
                 value={email}
-                style={styles.input}
+                style={[
+                  styles.input,
+                  emailFocused === true && styles.focusedInput,
+                ]}
                 placeholder="Адреса електронної пошти"
                 onChangeText={setEmail}
+                onFocus={() => setEmailFocused(true)}
+                onBlur={() => setEmailFocused(false)}
               />
-              <View style={styles.passwordContainer}>
+              <View
+                style={[
+                  styles.passwordContainer,
+                  passwordFocused === true && styles.focusedInput,
+                ]}
+              >
                 <TextInput
                   value={password}
                   style={styles.passwordInput}
                   placeholder="Пароль"
                   secureTextEntry={!showPassword}
                   onChangeText={setPassword}
+                  onFocus={() => setPasswordFocused(true)}
+                  onBlur={() => setPasswordFocused(false)}
                 />
-                <TouchableOpacity
+                <Pressable
                   style={styles.showPasswordButton}
                   onPress={togglePasswordVisibility}
                 >
                   <Text style={styles.showPasswordText}>
                     {showPassword ? "Приховати" : "Показати"}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
-
-              <TouchableOpacity
-                style={styles.registerButton}
+              {/* <Button
+                title="Увійти"
+                // style={styles.registerButton}
+                color={"#FF6C00"}
                 onPress={handleLogin}
+              /> */}
+              <Pressable
+                style={styles.registerButton}
+                // onPress={handleLogin}
+                onPress={() => {
+                  handleLogin;
+                  navigation.navigate("Home");
+                }}
               >
                 <Text style={styles.registerButtonText}>Увійти</Text>
-              </TouchableOpacity>
-
-              <Text style={styles.loginLink}>
-                Немає акаунту? Зареєструватися
+              </Pressable>
+              {/* <Pressable onPress={handleLogin}> */}
+              <Text
+                style={styles.RegisterLink}
+                onPress={() => navigation.navigate("Registration")}
+              >
+                Немає акаунту?{" "}
+                <Text style={{ textDecorationLine: "underline" }}>
+                  Зареєструватися
+                </Text>
               </Text>
+              {/* </Pressable> */}
             </KeyboardAvoidingView>
           </View>
         </View>
@@ -123,121 +129,107 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  container: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingTop: 323,
-    // paddingTop: 265,
+  wrapper: {
     flex: 1,
     alignItems: "center",
     width: "100%",
-    justifyContent: "center",
 
-    // height: 812,
-
-    borderRadius: 10,
+    justifyContent: "flex-end",
     flexShrink: 0,
   },
-  wrapper: {
-    backgroundColor: "white",
-    flex: 1,
+
+  container: {
+    backgroundColor: "#FFF",
+    borderRadius: 10,
     alignItems: "center",
     position: "relative",
-
     width: "100%",
-
-    height: 549,
-    flexShrink: 0,
+    height: 489,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
+    // borderBottomLeftRadius: 0,
+    // borderBottomRightRadius: 0,
   },
   title: {
-    fontFamily: "Roboto-Medium",
+    // fontFamily: "Roboto-Medium",
     marginTop: 32,
-    fontWeight: "bold",
-
     marginBottom: 33,
 
     color: "#212121",
     textAlign: "center",
-    fontSize: 30,
+    fontWeight: "bold",
     fontStyle: "normal",
+    fontSize: 30,
   },
   input: {
+    flexShrink: 0,
     width: 343,
     height: 50,
-    flexShrink: 0,
-    borderRadius: 3,
-    marginBottom: 16,
-    // fill: "rgba(246, 246, 246, 1)",
-    // strokeWidth: 1,
-    // stroke: "rgba(232, 232, 232, 1)",
+    padding: 10,
 
+    borderRadius: 5,
+    marginBottom: 16,
     backgroundColor: "#F6F6F6",
     borderWidth: 1,
     borderColor: "#E8E8E8",
-    fontFamily: "Roboto-Regular",
-    fontSize: 16,
 
-    padding: 10,
+    // fontFamily: "Roboto-Regular",
+    fontSize: 16,
   },
   passwordContainer: {
     backgroundColor: "#F6F6F6",
     borderWidth: 1,
     borderColor: "#E8E8E8",
-    borderRadius: 3,
+    borderRadius: 5,
 
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10,
+
     width: 343,
     height: 50,
     flexShrink: 0,
   },
+  focusedInput: {
+    borderColor: "#FF6C00",
+  },
   passwordInput: {
-    width: 343,
-    height: 50,
-    flexShrink: 0,
-
-    fontFamily: "Roboto-Regular",
+    // fontFamily: "Roboto-Regular",
     fontSize: 16,
     flex: 1,
     padding: 10,
   },
   showPasswordText: {
-    fontFamily: "Roboto-Regular",
+    // fontFamily: "Roboto-Regular",
     fontSize: 16,
     color: "#1B4371",
   },
   showPasswordButton: {
-    padding: 10,
+    paddingRight: 15,
   },
   registerButton: {
-    padding: 15,
+    padding: 16,
     marginTop: 43,
-
-    display: "flex",
-    width: 343,
-    flexDirection: "column",
-    alignItems: "center",
-    gap: 12,
 
     borderRadius: 100,
     backgroundColor: "#FF6C00",
-  },
-  registerButtonText: {
     color: "white",
     textAlign: "center",
-    fontFamily: "Roboto-Regular",
+    // fontFamily: "Roboto-Regular",
     fontSize: 16,
     fontStyle: "normal",
   },
-  loginLink: {
+  registerButtonText: {
+    color: "#FFF",
+    textAlign: "center",
+    // fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    fontStyle: "normal",
+  },
+  RegisterLink: {
+    textAlign: "center",
     marginTop: 16,
     color: "#1B4371",
-    fontFamily: "Roboto-Regular",
+    // fontFamily: "Roboto-Regular",
     fontSize: 16,
     fontStyle: "normal",
   },
